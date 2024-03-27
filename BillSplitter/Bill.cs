@@ -35,8 +35,7 @@ namespace BillSplitter
         public Stack<ProductEntity> CreateStackBillProduct()
         {
             List<ProductEntity> products = GetBillProduct();
-            products.OrderBy(p => p.Price).ToList();
-            var stack = new Stack<ProductEntity>(products);
+            var stack = new Stack<ProductEntity>(products.OrderBy(p => p.Price).ToList());
             return stack;
         }
 

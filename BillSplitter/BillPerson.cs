@@ -8,6 +8,13 @@ namespace App.BillSplitter
     {
         public string PersonName { get; set; }
         public decimal PayAmount { get; set; }
+        public decimal CurrentAmount
+        {
+            get
+            {
+                return BillItems.Sum(item => item.GetPrice());
+            }
+        }
         public List<BillItem> BillItems { get; set; }
         private List<ProductEntity> Products { get; set; }
         public BillPerson(string personName, decimal payAmount)
@@ -28,20 +35,15 @@ namespace App.BillSplitter
                 item.Print();
             }
             Console.WriteLine("------------------------");
-            Console.WriteLine($"Tong cong = {GetCurrentAmount()}");
+            Console.WriteLine($"Tong cong = {CurrentAmount}");
             Console.WriteLine("************************\n\n");
         }
 
         internal bool HasEnoughToPay()
         {
-            decimal currentAmount = GetCurrentAmount();
-            return PayAmount == currentAmount;
+            return PayAmount == CurrentAmount;
         }
 
-        private decimal GetCurrentAmount()
-        {
-            return BillItems.Sum(item => item.GetPrice());
-        }
 
         public void Pay(ProductEntity product)
         {
@@ -62,14 +64,12 @@ namespace App.BillSplitter
 
         public bool ExceedAmount(ProductEntity product)
         {
-            decimal currentAmount = GetCurrentAmount();
-            return PayAmount < currentAmount + product.Price;
+            return PayAmount < CurrentAmount + product.Price;
         }
 
         public bool NotExceedAmountButCannotFull(ProductEntity product, decimal minPriceOfProduct)
         {
-            decimal currentAmount = GetCurrentAmount();
-            decimal currentAddNew = currentAmount + product.Price;
+            decimal currentAddNew = CurrentAmount + product.Price;
             decimal remain = PayAmount - currentAddNew;
             return remain > 0 && remain < minPriceOfProduct || ExceedAmount(product);
         }

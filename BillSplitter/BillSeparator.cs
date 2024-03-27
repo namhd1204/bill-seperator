@@ -1,9 +1,4 @@
 ﻿using BillSplitter;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace App.BillSplitter
 {
@@ -20,17 +15,20 @@ namespace App.BillSplitter
 
         public void Separate() 
         {
-      
+            Validate();
             var stackOfProduct = BillInput.CreateStackBillProduct();
             var minPriceOfProduct = stackOfProduct.Min(p => p.Price);
             var queueOfPerson = GetQueueOfPerson();
             var tempStack = new Stack<ProductEntity>(stackOfProduct.Count);
+
+
             while (stackOfProduct.Count > 0)
             {
                 var product = stackOfProduct.Peek();
                 var person = queueOfPerson.Peek();
                 if (person.HasEnoughToPay())
                 {
+                    queueOfPerson.Dequeue();
                     continue;
                 }
 
@@ -48,10 +46,17 @@ namespace App.BillSplitter
 
                 stackOfProduct.Pop();
                 queueOfPerson.Enqueue(queueOfPerson.Dequeue());
-                if(tempStack.Count > 0)
-                {
-                    Move(tempStack, stackOfProduct);
-                }
+                Move(tempStack, stackOfProduct);
+            }
+        }
+
+        private void Validate()
+        {
+            decimal totalBill = BillInput.GetPrice();
+            decimal totalPay = Persons.Sum(p => p.PayAmount);
+            if (totalBill != totalPay)
+            {
+                throw new ArgumentException($"Tong gia tri hoa don ({totalBill}) khac tong so tien ma moi nguoi tra ({totalPay})");
             }
         }
 

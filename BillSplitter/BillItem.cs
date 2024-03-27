@@ -17,7 +17,7 @@
 
         internal void Print()
         {
-            Console.WriteLine($"{Product.ProductName}: {Product.Price} x {Quantity} = {GetPrice()}");
+            Console.WriteLine($"{Product.ProductName} => {Product.Price} x {Quantity} = {GetPrice()}");
         }
     }
 }
