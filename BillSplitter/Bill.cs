@@ -26,6 +26,7 @@ namespace BillSplitter
             Items.Add(new BillItem("Nuong tokyo", 1000, 3));
             Items.Add(new BillItem("Tom hum con", 1000, 11));
         }
+
         public decimal GetPrice()
         {
             return Items.Sum(item => item.GetPrice());

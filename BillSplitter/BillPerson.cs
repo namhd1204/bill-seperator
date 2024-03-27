@@ -59,5 +59,19 @@ namespace App.BillSplitter
                 })
                 .ToList();
         }
+
+        public bool ExceedAmount(ProductEntity product)
+        {
+            decimal currentAmount = GetCurrentAmount();
+            return PayAmount < currentAmount + product.Price;
+        }
+
+        public bool NotExceedAmountButCannotFull(ProductEntity product, decimal minPriceOfProduct)
+        {
+            decimal currentAmount = GetCurrentAmount();
+            decimal currentAddNew = currentAmount + product.Price;
+            decimal remain = PayAmount - currentAddNew;
+            return remain > 0 && remain < minPriceOfProduct || ExceedAmount(product);
+        }
     }
 }
