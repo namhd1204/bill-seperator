@@ -1,8 +1,8 @@
-#Mô tả bài toán:
-Có một hóa đơn có tổng số tiền phải trả là X, trong đó gồm nhiều loại hàng hóa có đơn giá là P và số lượng là Q. X = Tổng(P x Q mỗi loại).
-Có Y số người mong muốn cùng nhau chia sẻ hóa đơn này, tức là mỗi người có 1 hóa đơn con
-Kết quả mong muốn là tìm ra số lượng của mỗi sản phẩm trong một hóa đơn con của mỗi người là bao nhiều.
-#Mô tả giải thuật:
+# Mô tả bài toán:
+- Có một hóa đơn có tổng số tiền phải trả là X, trong đó gồm nhiều loại hàng hóa có đơn giá là P và số lượng là Q. X = Tổng(P x Q mỗi loại).
+- Có Y số người mong muốn cùng nhau chia sẻ hóa đơn này, tức là mỗi người có 1 hóa đơn con
+- Kết quả mong muốn là tìm ra số lượng của mỗi sản phẩm trong một hóa đơn con của mỗi người là bao nhiều.
+# Mô tả giải thuật:
 - Bước 1: Kiểm tra đầu vào bài toán xem tổng của hóa đơn đã bằng tổng số tiền của những người chia sẻ có bằng nhau không. Nếu không bằng thì dừng chương trình
 - Bước 2: Tạo stack A dùng để chứa các sản phẩm riêng lẻ từ hóa đơn, mỗi một item là 1 sản phẩm và được sắp xếp theo giá từ nhỏ đến lớn, giá nhỏ nhất ở đấy stack, giá lớn nhất ở đỉnh stack
 - Bước 3: Tạo stack B sử dụng như một bộ đệm, sẽ mô tả kĩ hơn ở dưới đây
