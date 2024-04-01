@@ -17,9 +17,9 @@ namespace App.BillSplitter
         {
             Validate();
             var stackOfProduct = BillInput.CreateStackBillProduct();
-            var minPriceOfProduct = stackOfProduct.Min(p => p.Price);
-            var queueOfPerson = GetQueueOfPerson();
             var tempStack = new Stack<ProductEntity>(stackOfProduct.Count);
+            var queueOfPerson = GetQueueOfPerson();
+            var minPriceOfProduct = stackOfProduct.Min(p => p.Price);
 
 
             while (stackOfProduct.Count > 0)

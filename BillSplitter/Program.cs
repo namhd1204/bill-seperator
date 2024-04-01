@@ -45,7 +45,3 @@ foreach (var billPersons in testcase)
         Console.WriteLine(ex.Message);
     }
 }
-
-
-
-
